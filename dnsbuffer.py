@@ -12,13 +12,10 @@ def main():
     r = requests.get('http://dns.bufferover.run/dns?q=' + domain)
 
     json_resp = json.loads(r.text)
-    output = open('dnsbuffer_'+domain[1:], 'w')
 
     for data in json_resp['FDNS_A']:
-        print data
-        output.write(data + '\n')
-
-    output.close()
+        hostname = data.split(',')[1]
+        print hostname
 
 
 if __name__ == '__main__':
